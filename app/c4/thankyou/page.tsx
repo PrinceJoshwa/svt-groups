@@ -9,7 +9,7 @@ import { ArrowLeft } from "lucide-react" // Using an icon for the button
 export default function ThankYouPage() {
   return (
     <>
-      {/* Event snippet for Request quote conversion page [cite: 2]
+      {/* Event snippet for Request quote conversion page 
         This uses next/script to safely inject the script after
         the page is interactive.
       */}
