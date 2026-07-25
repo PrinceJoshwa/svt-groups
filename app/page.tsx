@@ -3698,14 +3698,14 @@ export default function Page() {
   //   }
   // };
 
-  const submitToFormspree = async (
+const submitToFormspree = async (
     e: React.FormEvent<HTMLFormElement>,
     key: FormKey
   ) => {
     e.preventDefault();
     const form = e.currentTarget;
     setFormStatus((s) => ({ ...s, [key]: "loading" }));
-    
+
     try {
       const data = new FormData(form);
       const res = await fetch(FORMSPREE_ENDPOINT, {
@@ -3713,16 +3713,22 @@ export default function Page() {
         body: data,
         headers: { Accept: "application/json" },
       });
-      
+
       if (res.ok) {
         setFormStatus((s) => ({ ...s, [key]: "success" }));
         setIsUnlocked(true);
-        if (key === "unlock") setIsPopupOpen(false);
+        
+        // Close the popup if the unlock form was submitted
+        if (key === "unlock") {
+          setIsPopupOpen(false);
+        }
+        
         form.reset();
-        
-        // Trigger the redirect to the Thank You page
-        router.push("/c4/thankyou"); 
-        
+
+        // Only redirect to the Thank You page for the top and bottom forms
+        if (key === "enquire" || key === "top") {
+          router.push("/c4/thankyou");
+        }
       } else {
         setFormStatus((s) => ({ ...s, [key]: "error" }));
       }
@@ -3903,7 +3909,7 @@ export default function Page() {
       </section>
 
       {/* ---------------------------------------------------------- QUICK ENQUIRY (TOP CONTACT FORM) */}
-      <section id="quick-enquiry" className="relative px-6 lg:px-10 py-16 sm:py-20 bg-[#F8F9FA] border-b border-navy/5">
+      {/* <section id="quick-enquiry" className="relative px-6 lg:px-10 py-16 sm:py-20 bg-[#F8F9FA] border-b border-navy/5">
         <div className="mx-auto max-w-4xl">
           <Reveal className="text-center mb-10">
             <p className="text-[12px] tracking-[0.2em] uppercase text-gold mb-3">Get Started</p>
@@ -3956,6 +3962,59 @@ export default function Page() {
                   <CheckCircle2 className="h-4 w-4" /> Thank you! Your details were received — floor plans & brochure are now unlocked below.
                 </p>
               )}
+              {formStatus.top === "error" && (
+                <p className="sm:col-span-2 text-[13px] text-red-600">
+                  Something went wrong. Please try again or call us directly at +91 {PHONES[0]}.
+                </p>
+              )}
+            </form>
+          </Reveal>
+        </div>
+      </section> */}
+
+      {/* ---------------------------------------------------------- QUICK ENQUIRY (TOP CONTACT FORM) */}
+      <section id="quick-enquiry" className="relative px-6 lg:px-10 py-16 sm:py-20 bg-[#F8F9FA] border-b border-navy/5">
+        <div className="mx-auto max-w-4xl">
+          <Reveal className="text-center mb-10">
+            <p className="text-[12px] tracking-[0.2em] uppercase text-gold mb-3">Get Started</p>
+            <h2 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl leading-tight text-navy">
+              Talk to us about <span className="text-gold italic">Confident Atria</span>
+            </h2>
+            <p className="mt-3 text-[14px] sm:text-[15px] text-navy/60 max-w-md mx-auto">
+              Share your details and our expert team will reach out to answer your questions and schedule a site visit.
+            </p>
+          </Reveal>
+
+          <Reveal delay={100} className="bg-white rounded-[2rem] border border-navy/10 shadow-lg p-6 sm:p-10">
+            <form onSubmit={(e) => submitToFormspree(e, "top")} className="grid sm:grid-cols-2 gap-6">
+              <input type="hidden" name="_subject" value="New enquiry — Confident Atria (Quick Form)" />
+              
+              <div className="relative">
+                <input type="text" id="top-name" name="name" required suppressHydrationWarning placeholder=" " className="peer w-full bg-transparent border-b border-navy/20 py-3 text-[16px] sm:text-[15px] text-navy focus:outline-none focus:border-gold transition-colors" />
+                <label htmlFor="top-name" className="absolute left-0 top-3 text-[14px] text-navy/40 transition-all peer-focus:-top-3 peer-focus:text-[11px] peer-focus:text-gold peer-focus:tracking-widest peer-focus:uppercase peer-valid:-top-3 peer-valid:text-[11px] peer-valid:text-gold peer-valid:tracking-widest peer-valid:uppercase">Full Name</label>
+              </div>
+              
+              <div className="relative">
+                <input type="tel" id="top-phone" name="phone" required suppressHydrationWarning placeholder=" " className="peer w-full bg-transparent border-b border-navy/20 py-3 text-[16px] sm:text-[15px] text-navy focus:outline-none focus:border-gold transition-colors" />
+                <label htmlFor="top-phone" className="absolute left-0 top-3 text-[14px] text-navy/40 transition-all peer-focus:-top-3 peer-focus:text-[11px] peer-focus:text-gold peer-focus:tracking-widest peer-focus:uppercase peer-valid:-top-3 peer-valid:text-[11px] peer-valid:text-gold peer-valid:tracking-widest peer-valid:uppercase">Phone Number</label>
+              </div>
+              
+              <div className="relative sm:col-span-2">
+                <input type="email" id="top-email" name="email" suppressHydrationWarning placeholder=" " className="peer w-full bg-transparent border-b border-navy/20 py-3 text-[16px] sm:text-[15px] text-navy focus:outline-none focus:border-gold transition-colors" />
+                <label htmlFor="top-email" className="absolute left-0 top-3 text-[14px] text-navy/40 transition-all peer-focus:-top-3 peer-focus:text-[11px] peer-focus:text-gold peer-focus:tracking-widest peer-focus:uppercase peer-valid:-top-3 peer-valid:text-[11px] peer-valid:text-gold peer-valid:tracking-widest peer-valid:uppercase">Email Address (Optional)</label>
+              </div>
+
+              <div className="sm:col-span-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                <button
+                  type="submit"
+                  disabled={formStatus.top === "loading"}
+                  suppressHydrationWarning
+                  className="w-full sm:w-auto flex-1 rounded-full bg-gold px-8 py-4 text-[13px] font-semibold tracking-wider uppercase text-navy hover:bg-navy hover:text-pearl transition-all duration-300 disabled:opacity-60"
+                >
+                  {formStatus.top === "loading" ? "Submitting..." : "Submit Enquiry"}
+                </button>
+              </div>
+              
               {formStatus.top === "error" && (
                 <p className="sm:col-span-2 text-[13px] text-red-600">
                   Something went wrong. Please try again or call us directly at +91 {PHONES[0]}.
@@ -4526,6 +4585,7 @@ function Logo({
             src={CONFIDENT_ATRIA_LOGO}
             alt="Confident Atria logo"
             fill
+            priority
             className="object-contain object-left"
           />
         </span>
@@ -4535,6 +4595,7 @@ function Logo({
             src={RRL_LOGO}
             alt="RRL Group logo"
             fill
+            priority
             className="object-contain object-left"
           />
         </span>
