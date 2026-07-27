@@ -4714,7 +4714,7 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/mdaqpnwq";
 /* ------------------------------------------------------------------ */
 
 const HERO_IMAGE =
-  "https://ik.imagekit.io/j0xzq9pns/svt/WhatsApp%20Image%202026-07-24%20at%205.11.12%20PM.jpeg";
+  "https://ik.imagekit.io/j0xzq9pns/svt/Atria%20poster%20web.png";
 const RRL_LOGO = "https://ik.imagekit.io/j0xzq9pns/svt/logo.png";
 const CONFIDENT_ATRIA_LOGO =
   "https://ik.imagekit.io/j0xzq9pns/svt/ChatGPT%20Image%20Jul%2025,%202026,%2012_41_19%20AM.png?updatedAt=1784920355583";
