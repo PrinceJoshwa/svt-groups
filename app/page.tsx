@@ -8489,6 +8489,10 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation"; 
+import { motion } from 'framer-motion'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons'
+// Also ensure you have the Download icon if you are still using lucide-react for the brochure
 import { Fraunces, Manrope, IBM_Plex_Mono } from "next/font/google";
 import {
   Phone,
@@ -9954,7 +9958,9 @@ const submitToFormspree = async (
       )}
 
       {/* ---------------------------------------------------------- FLOATING WHATSAPP + STICKY BROCHURE BUTTONS */}
-      <div className="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 z-[70] flex flex-col items-end gap-3">
+<div className="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 z-[70] flex flex-col items-end gap-3">
+        
+        {/* Brochure Button */}
         <a
           href={isUnlocked ? BROCHURE_URL : "#brochure"}
           target={isUnlocked ? "_blank" : undefined}
@@ -9969,18 +9975,40 @@ const submitToFormspree = async (
           className="flex items-center justify-center h-[42px] w-[64px] rounded-[24px] bg-navy/95 border border-gold/70 text-white shadow-xl hover:bg-gold hover:text-navy hover:border-gold transition-all duration-300 backdrop-blur-sm"
         >
           <Download className="h-4 w-4 shrink-0" />
-          {/* <span className="hidden sm:inline"></span> */}
         </a>
 
-        <a
-          href="https://wa.me/918494966966?text=Hi%2C%20I%27m%20interested%20in%20the%204%20BHK%20villas%20at%20Confident%20Atria."
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Chat with us on WhatsApp"
-          className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-[#25D366] text-white shadow-2xl hover:scale-110 hover:shadow-[0_0_20px_rgba(37,211,102,0.5)] transition-all duration-300"
+        {/* Animated FontAwesome WhatsApp Button */}
+        <motion.div
+          className="relative flex items-center justify-center"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 20 }}
         >
-          <MessageCircle className="h-7 w-7 text-white" strokeWidth={2} />
-        </a>
+          {/* Blinking Animation Wrapper */}
+          <motion.div
+            className="absolute inset-0 rounded-full bg-[#25D366]"
+            animate={{
+              scale: [1, 1.4, 1],
+              opacity: [0.5, 0.1, 0.5],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+            }}
+          />
+          
+          {/* Your WhatsApp Link with FontAwesome Icon */}
+          <a
+            href="https://wa.me/918494966966?text=Hi%2C%20I%27m%20interested%20in%20the%204%20BHK%20villas%20at%20Confident%20Atria."
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat with us on WhatsApp"
+            className="relative inline-flex items-center justify-center h-14 w-14 rounded-full bg-[#25D366] text-white shadow-2xl hover:scale-110 hover:shadow-[0_0_20px_rgba(37,211,102,0.5)] transition-all duration-300 z-10"
+          >
+            <FontAwesomeIcon icon={faWhatsapp} size="2xl" />
+          </a>
+        </motion.div>
+
       </div>
     </main>
   );
