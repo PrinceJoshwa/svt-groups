@@ -8709,6 +8709,15 @@ const AMENITIES = [
   },
 ];
 
+const VILLA_IMAGES = [
+  "https://ik.imagekit.io/j0xzq9pns/svt/inside%20villa/ChatGPT-Image-Jul-19-2026-11_11_25-PM.png", // Replace with your actual 6 image paths
+  "https://ik.imagekit.io/j0xzq9pns/svt/inside%20villa/image%20(5).png",
+  "https://ik.imagekit.io/j0xzq9pns/svt/inside%20villa/ChatGPT-Image-Jul-19-2026-11_14_35-PM.png",
+  "https://ik.imagekit.io/j0xzq9pns/svt/inside%20villa/image%20(6).png",
+  "https://ik.imagekit.io/j0xzq9pns/svt/inside%20villa/ChatGPT-Image-Jul-19-2026-11_14_44-PM.png",
+  "https://ik.imagekit.io/j0xzq9pns/svt/inside%20villa/ChatGPT-Image-Jul-19-2026-11_07_10-PM.png",
+];
+
 type Room = { name: string; dim: string };
 
 function getRoomIcon(name: string) {
@@ -9451,47 +9460,78 @@ const submitToFormspree = async (
         </div>
       </section>
 
-      {/* ---------------------------------------------------------- INSIDE THE VILLA */}
+{/* ---------------------------------------------------------- INSIDE THE VILLA */}
       <section className="relative px-6 lg:px-10 py-24 sm:py-32 bg-[#F8F9FA]">
         <div className="mx-auto max-w-7xl">
-          <Reveal className="text-center max-w-2xl mx-auto mb-16">
-            <p className="text-[12px] tracking-[0.2em] uppercase text-gold mb-4">A Glimpse of Your Future Home</p>
-            <h2 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl leading-tight text-navy">
-              Inside the Villa
+          
+          {/* 1. Header Section */}
+          <Reveal className="mb-10 sm:mb-12">
+            <h2 className="font-[family-name:var(--font-display)] text-2xl sm:text-3xl md:text-4xl leading-tight text-navy ">
+              Inside the Villa <span className="text-gold italic">— A Glimpse of Your Future Home</span>
             </h2>
-            <p className="mt-4 text-[15px] leading-relaxed text-navy/60">
+          </Reveal>
+
+          {/* 2. Pure Image Gallery (6 Images) */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-8">
+            {VILLA_IMAGES.map((imgSrc, i) => (
+              <Reveal key={i} delay={i * 100}>
+                <div className="rounded-2xl overflow-hidden shadow-sm h-48 sm:h-64 lg:h-80 border border-navy/5">
+                  <img 
+                    src={imgSrc} 
+                    alt={`Inside the Villa ${i + 1}`} 
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" 
+                  />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* 3. Subtext */}
+          <Reveal delay={200} className="text-center mb-10">
+            <p className="italic text-[14px] sm:text-[15px] text-navy/70 font-medium">
               Actual site photos — premium finishes, spacious interiors, and quality craftsmanship throughout.
             </p>
           </Reveal>
-          <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
-            <Reveal delay={100}>
-              <div className="group h-full rounded-2xl bg-white p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-500 border border-transparent hover:border-gold/30 hover:-translate-y-2">
-                <div className="h-14 w-14 rounded-full flex items-center justify-center mb-6 bg-[#F8F9FA] group-hover:bg-gold transition-colors duration-500">
-                  <HomeIcon className="h-6 w-6 text-navy group-hover:text-white transition-colors duration-500" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-[17px] font-semibold text-navy mb-3">Premium Finishes</h3>
-                <p className="text-[14px] leading-relaxed text-navy/60">Top-grade materials and brand-name fittings across every room.</p>
-              </div>
-            </Reveal>
-            <Reveal delay={200}>
-              <div className="group h-full rounded-2xl bg-white p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-500 border border-transparent hover:border-gold/30 hover:-translate-y-2">
-                <div className="h-14 w-14 rounded-full flex items-center justify-center mb-6 bg-[#F8F9FA] group-hover:bg-gold transition-colors duration-500">
-                  <Ruler className="h-6 w-6 text-navy group-hover:text-white transition-colors duration-500" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-[17px] font-semibold text-navy mb-3">Spacious Interiors</h3>
-                <p className="text-[14px] leading-relaxed text-navy/60">Thoughtfully designed layouts that maximise comfort and natural light.</p>
-              </div>
-            </Reveal>
+
+          {/* 4. Bottom Feature Cards */}
+          <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
             <Reveal delay={300}>
-              <div className="group h-full rounded-2xl bg-white p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-500 border border-transparent hover:border-gold/30 hover:-translate-y-2">
-                <div className="h-14 w-14 rounded-full flex items-center justify-center mb-6 bg-[#F8F9FA] group-hover:bg-gold transition-colors duration-500">
-                  <Hammer className="h-6 w-6 text-navy group-hover:text-white transition-colors duration-500" strokeWidth={1.5} />
+              <div className="h-full rounded-2xl bg-transparent p-6 sm:p-8 border-2 border-gold/30 hover:border-gold transition-colors duration-300">
+                <div className="flex items-center gap-3 mb-4">
+                  <HomeIcon className="h-5 w-5 text-gold" strokeWidth={2} />
+                  <h3 className="text-[17px] font-semibold text-navy">Premium Finishes</h3>
                 </div>
-                <h3 className="text-[17px] font-semibold text-navy mb-3">Quality Craftsmanship</h3>
-                <p className="text-[14px] leading-relaxed text-navy/60">Skilled workmanship visible in every corner and surface detail.</p>
+                <p className="text-[14px] leading-relaxed text-navy/60">
+                  Top-grade materials and brand-name fittings across every room.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={400}>
+              <div className="h-full rounded-2xl bg-transparent p-6 sm:p-8 border-2 border-gold/30 hover:border-gold transition-colors duration-300">
+                <div className="flex items-center gap-3 mb-4">
+                  <Ruler className="h-5 w-5 text-gold" strokeWidth={2} />
+                  <h3 className="text-[17px] font-semibold text-navy">Spacious Interiors</h3>
+                </div>
+                <p className="text-[14px] leading-relaxed text-navy/60">
+                  Thoughtfully designed layouts that maximise comfort and natural light.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={500}>
+              <div className="h-full rounded-2xl bg-transparent p-6 sm:p-8 border-2 border-gold/30 hover:border-gold transition-colors duration-300">
+                <div className="flex items-center gap-3 mb-4">
+                  <Hammer className="h-5 w-5 text-gold" strokeWidth={2} />
+                  <h3 className="text-[17px] font-semibold text-navy">Quality Craftsmanship</h3>
+                </div>
+                <p className="text-[14px] leading-relaxed text-navy/60">
+                  Skilled workmanship visible in every corner and surface detail.
+                </p>
               </div>
             </Reveal>
           </div>
+
         </div>
       </section>
 
