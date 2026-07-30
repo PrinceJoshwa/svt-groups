@@ -8619,44 +8619,87 @@ const SITE_AREAS: { site: string; area: string }[] = [
 ];
 
 // Fully updated exact amenities from the PDF and Flyer
+// const AMENITIES = [
+//   {
+//     icon: Coffee,
+//     title: "Premium Clubhouse",
+//     body: "A Family & Social hub featuring a premium clubhouse, banquet hall, and an outdoor amphitheater.",
+//   },
+//   {
+//     icon: Waves,
+//     title: "Large Swimming Pool",
+//     body: "A pristine, large recreational swimming pool designed for daily relaxation and fitness.",
+//   },
+//   {
+//     icon: Trophy,
+//     title: "Sports & Courts",
+//     body: "Tennis & basketball courts, dedicated indoor squash and badminton courts, and an indoor games room.",
+//   },
+//   {
+//     icon: Dumbbell,
+//     title: "Fitness & Tracks",
+//     body: "Fully equipped gymnasium alongside dedicated jogging, strolling, and cycling tracks.",
+//   },
+//   {
+//     icon: TreePine,
+//     title: "Parks & Open Lawns",
+//     body: "Beautiful flower gardens, landscaped open lawns, and a dedicated safe children's play area.",
+//   },
+//   {
+//     icon: ShieldCheck,
+//     title: "24/7 Manned Security",
+//     body: "Fully gated community with 24/7 manned security, extensive CCTV surveillance, and visitor parking.",
+//   },
+//   {
+//     icon: Droplets,
+//     title: "Eco-Friendly Infrastructure",
+//     body: "Concrete internal roads, eco-friendly rainwater harvesting, and robust water storage systems.",
+//   },
+//   {
+//     icon: Sun,
+//     title: "Vaastu Compliant",
+//     body: "Thoughtfully designed spaces ensuring 100% Vaastu compliance along with a dedicated meditation area.",
+//   },
+// ];
+
 const AMENITIES = [
   {
-    icon: Coffee,
+    image: "https://ik.imagekit.io/j0xzq9pns/svt/Amenities/Gemini_Generated_Image_ibkooribkooribko.png?updatedAt=1785396370955", // Replace with your actual image path
     title: "Premium Clubhouse",
     body: "A Family & Social hub featuring a premium clubhouse, banquet hall, and an outdoor amphitheater.",
   },
   {
-    icon: Waves,
+    image: "https://ik.imagekit.io/j0xzq9pns/svt/Amenities/Gemini_Generated_Image_ibkooribkooribko%20(2).png?updatedAt=1785396365858",
     title: "Large Swimming Pool",
     body: "A pristine, large recreational swimming pool designed for daily relaxation and fitness.",
   },
   {
-    icon: Trophy,
+    image: "https://ik.imagekit.io/j0xzq9pns/svt/Amenities/Gemini_Generated_Image_ibkooribkooribko%20(3).png?updatedAt=1785396383525",
     title: "Sports & Courts",
     body: "Tennis & basketball courts, dedicated indoor squash and badminton courts, and an indoor games room.",
   },
   {
-    icon: Dumbbell,
+    image: "https://ik.imagekit.io/j0xzq9pns/svt/Amenities/Gemini_Generated_Image_yausmlyausmlyaus%20(1).png",
     title: "Fitness & Tracks",
     body: "Fully equipped gymnasium alongside dedicated jogging, strolling, and cycling tracks.",
   },
   {
-    icon: TreePine,
+    image: "https://ik.imagekit.io/j0xzq9pns/svt/Amenities/park.jpeg",
     title: "Parks & Open Lawns",
     body: "Beautiful flower gardens, landscaped open lawns, and a dedicated safe children's play area.",
   },
   {
-    icon: ShieldCheck,
+    image: "https://ik.imagekit.io/j0xzq9pns/svt/Amenities/Gemini_Generated_Image_ibkooribkooribko%20(6).png?updatedAt=1785396365950",
     title: "24/7 Manned Security",
     body: "Fully gated community with 24/7 manned security, extensive CCTV surveillance, and visitor parking.",
   },
   {
-    icon: Droplets,
+    image: "https://ik.imagekit.io/j0xzq9pns/svt/Amenities/Gemini_Generated_Image_ibkooribkooribko%20(5).png?updatedAt=1785396386864",
     title: "Eco-Friendly Infrastructure",
     body: "Concrete internal roads, eco-friendly rainwater harvesting, and robust water storage systems.",
   },
   {
-    icon: Sun,
+    image: "https://ik.imagekit.io/j0xzq9pns/svt/Amenities/Gemini_Generated_Image_ibkooribkooribko%20(7).png?updatedAt=1785396380395",
     title: "Vaastu Compliant",
     body: "Thoughtfully designed spaces ensuring 100% Vaastu compliance along with a dedicated meditation area.",
   },
@@ -9342,7 +9385,7 @@ const submitToFormspree = async (
 
 
       {/* ---------------------------------------------------------- AMENITIES */}
-      <section className="relative px-6 lg:px-10 py-24 sm:py-32 bg-white border-y border-navy/5">
+      {/* <section className="relative px-6 lg:px-10 py-24 sm:py-32 bg-white border-y border-navy/5">
         <div className="mx-auto max-w-7xl">
           <Reveal className="text-center max-w-2xl mx-auto mb-20">
             <p className="text-[12px] tracking-[0.2em] uppercase text-gold mb-4">Living Here</p>
@@ -9359,6 +9402,44 @@ const submitToFormspree = async (
                   </div>
                   <h3 className="text-[17px] font-semibold text-navy mb-3">{a.title}</h3>
                   <p className="text-[14px] leading-relaxed text-navy/60">{a.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section> */}
+
+{/* ---------------------------------------------------------- AMENITIES */}
+      <section className="relative px-6 lg:px-10 py-24 sm:py-32 bg-white border-y border-navy/5">
+        <div className="mx-auto max-w-7xl">
+          <Reveal className="text-center max-w-2xl mx-auto mb-20">
+            <p className="text-[12px] tracking-[0.2em] uppercase text-gold mb-4">Living Here</p>
+            <h2 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl leading-tight text-navy">
+              World-Class Amenities for Every Lifestyle
+            </h2>
+          </Reveal>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            {AMENITIES.map((a, i) => (
+              <Reveal key={a.title} delay={i * 100}>
+                {/* Updated Card Container: Added overflow-hidden and flex-col */}
+                <div className="group h-full rounded-2xl bg-[#F8F9FA] shadow-sm hover:shadow-xl transition-all duration-500 border border-transparent hover:border-gold/30 hover:-translate-y-2 overflow-hidden flex flex-col">
+                  
+                  {/* Top Image Section */}
+                  <div className="w-full h-48 sm:h-52 overflow-hidden">
+                    <img 
+                      src={a.image} 
+                      alt={a.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                    />
+                  </div>
+                  
+                  {/* Bottom Details Section */}
+                  <div className="p-6 sm:p-8 flex flex-col flex-grow">
+                    <h3 className="text-[17px] font-semibold text-navy mb-3">{a.title}</h3>
+                    <p className="text-[14px] leading-relaxed text-navy/60">{a.body}</p>
+                  </div>
+
                 </div>
               </Reveal>
             ))}
